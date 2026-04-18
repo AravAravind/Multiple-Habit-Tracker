@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Habit & Milestone Tracker</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="app-panel" aria-labelledby="app-title">
+        <header class="app-header">
+          <p class="eyebrow">Offline progress tracking</p>
+          <h1 id="app-title">Habit &amp; Milestone Tracker</h1>
+          <p class="subtitle">
+            Track every streak in total days with India Standard Time accuracy.
+          </p>
+        </header>
+
+        <section class="form-section" aria-labelledby="form-title">
+          <div class="section-heading">
+            <h2 id="form-title">Add a milestone</h2>
+            <p>Create a new tracker for any habit, streak, or long-term goal.</p>
+          </div>
+
+          <form id="habit-form" class="habit-form" novalidate>
+            <div class="field-group">
+              <label for="habit-name">Habit name</label>
+              <input
+                id="habit-name"
+                name="habit-name"
+                type="text"
+                maxlength="120"
+                placeholder="Examples: Gym, Reading, No sugar"
+                autocomplete="off"
+                required
+              />
+            </div>
+
+            <div class="field-group">
+              <label for="start-date">Start date</label>
+              <input id="start-date" name="start-date" type="date" required />
+            </div>
+
+            <button type="submit" class="primary-button">Add Habit</button>
+          </form>
+
+          <p id="form-message" class="form-message" role="alert" aria-live="polite"></p>
+        </section>
+
+        <section class="habits-section" aria-labelledby="habits-title">
+          <div class="section-heading section-heading-row">
+            <div>
+              <h2 id="habits-title">Your milestones</h2>
+              <p>All data stays on this device using your browser storage.</p>
+            </div>
+          </div>
+
+          <div id="habits-container" class="habits-container" aria-live="polite"></div>
+        </section>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
