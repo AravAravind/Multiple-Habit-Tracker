@@ -86,9 +86,15 @@
     var nextLabel = resolvedTheme === "dark" ? "Light mode" : "Dark mode";
 
     document.body.setAttribute("data-theme", resolvedTheme);
-    themeToggle.setAttribute("aria-pressed", String(resolvedTheme === "dark"));
-    themeToggle.setAttribute("aria-label", "Switch to " + nextLabel.toLowerCase());
-    themeToggleText.textContent = nextLabel;
+
+    if (themeToggle) {
+      themeToggle.setAttribute("aria-pressed", String(resolvedTheme === "dark"));
+      themeToggle.setAttribute("aria-label", "Switch to " + nextLabel.toLowerCase());
+    }
+
+    if (themeToggleText) {
+      themeToggleText.textContent = nextLabel;
+    }
   }
 
   function toggleTheme() {
@@ -335,7 +341,10 @@
   applyTheme(loadTheme());
   form.addEventListener("submit", handleSubmit);
   habitsContainer.addEventListener("click", handleDelete);
-  themeToggle.addEventListener("click", toggleTheme);
+
+  if (themeToggle) {
+    themeToggle.addEventListener("click", toggleTheme);
+  }
 
   render();
 
