@@ -4,13 +4,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Habit & Milestone Tracker</title>
+    <meta name="color-scheme" content="light dark" />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <main class="app-shell">
       <section class="app-panel" aria-labelledby="app-title">
         <header class="app-header">
-          <p class="eyebrow">Offline progress tracking</p>
+          <div class="header-topbar">
+            <p class="eyebrow">Offline progress tracking</p>
+            <button
+              id="theme-toggle"
+              class="theme-toggle"
+              type="button"
+              aria-label="Switch to dark theme"
+              aria-pressed="false"
+            >
+              <span class="theme-toggle-icon" aria-hidden="true"></span>
+              <span id="theme-toggle-text">Dark mode</span>
+            </button>
+          </div>
           <h1 id="app-title">Habit &amp; Milestone Tracker</h1>
           <p class="subtitle">
             Track every streak in total days with India Standard Time accuracy.

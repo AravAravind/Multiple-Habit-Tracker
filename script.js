@@ -2,6 +2,7 @@
   "use strict";
 
   var STORAGE_KEY = "habits";
+  var THEME_STORAGE_KEY = "habit-theme";
   var MILLISECONDS_PER_DAY = 86400000;
   var IST_OFFSET_MINUTES = 330;
   var state = loadHabits();
@@ -11,6 +12,8 @@
   var dateInput = document.getElementById("start-date");
   var formMessage = document.getElementById("form-message");
   var habitsContainer = document.getElementById("habits-container");
+  var themeToggle = document.getElementById("theme-toggle");
+  var themeToggleText = document.getElementById("theme-toggle-text");
 
   function loadHabits() {
     try {
@@ -58,6 +61,42 @@
 
   function saveHabits() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }
+
+  function loadTheme() {
+    try {
+      var storedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+
+      if (storedTheme === "light" || storedTheme === "dark") {
+        return storedTheme;
+      }
+    } catch (error) {
+      return "light";
+    }
+
+    return "light";
+  }
+
+  function saveTheme(theme) {
+    localStorage.setItem(THEME_STORAGE_KEY, theme);
+  }
+
+  function applyTheme(theme) {
+    var resolvedTheme = theme === "dark" ? "dark" : "light";
+    var nextLabel = resolvedTheme === "dark" ? "Light mode" : "Dark mode";
+
+    document.body.setAttribute("data-theme", resolvedTheme);
+    themeToggle.setAttribute("aria-pressed", String(resolvedTheme === "dark"));
+    themeToggle.setAttribute("aria-label", "Switch to " + nextLabel.toLowerCase());
+    themeToggleText.textContent = nextLabel;
+  }
+
+  function toggleTheme() {
+    var currentTheme = document.body.getAttribute("data-theme") === "dark" ? "dark" : "light";
+    var nextTheme = currentTheme === "dark" ? "light" : "dark";
+
+    applyTheme(nextTheme);
+    saveTheme(nextTheme);
   }
 
   function createISTMidnightTimestamp(year, month, day) {
@@ -293,8 +332,10 @@
   }
 
   dateInput.max = getTodayISTInputValue();
+  applyTheme(loadTheme());
   form.addEventListener("submit", handleSubmit);
   habitsContainer.addEventListener("click", handleDelete);
+  themeToggle.addEventListener("click", toggleTheme);
 
   render();
 
